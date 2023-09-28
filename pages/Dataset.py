@@ -12,25 +12,31 @@ st.set_page_config(page_title="DataSet", page_icon=":chart:", layout="wide")
 with open("styles/dataset.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# READING DATASET
+#READING DATASET
 raw = pd.read_excel("Dataset/Raw_Materials.xlsx")
 inv = pd.read_excel("Dataset/Inventory.xlsx")
 sal = pd.read_excel("Dataset/Sales.xlsx")
 
+#Original Columns
 org_raw_col = list(raw.columns)
 org_inv_col = list(inv.columns)
 org_sal_col = list(sal.columns)
 
+#End Dates
 org_raw_max_date = raw["Date"].max()
 org_inv_max_date = inv["Date"].max()
 org_sal_max_date = sal["Date"].max()
 
+#Max Order ID 
 org_raw_max_id = raw["Order_ID"]
 org_inv_max_id = inv["Order_ID"]
 org_sal_max_id = sal["Order_ID"]
 
+#UPLOAD SECTION
 st.markdown("## UPLOAD :arrow_up:")
 up_col1, up_col2, up_col3 = st.columns((3))
+
+#RAW MATERIALS
 with up_col1:
     up_col1.markdown("### Raw Materials :thread:")
     up_raw = st.file_uploader("", ["csv", "xls", "xlsx"])
@@ -55,7 +61,7 @@ with up_col1:
         else:
             up_col1.warning("Mismatch Columns or Wrong Excel Sheet")
 
-
+#INVENTORY
 with up_col2:
     up_col2.markdown("### Inventory :package:")
     up_inv = st.file_uploader(" ", ["csv", "xls", "xlsx"])
@@ -66,6 +72,7 @@ with up_col2:
             progress_bar.progress(i + 1)
         up_col2.success("File Successfully Uploaded")
 
+#SALES
 with up_col3:
     up_col3.markdown("### Sales :moneybag:")
     up_sal = st.file_uploader("  ", ["csv", "xls", "xlsx"])
@@ -78,10 +85,12 @@ with up_col3:
 
 st.markdown("<br><br>", unsafe_allow_html=True)
 
+#DOWNLOAD SECTION
 st.markdown("## DOWNLOAD :arrow_down:")
 
 down_col1, down_col2, down_col3 = st.columns((3))
 
+#RAW MATERIALS
 with down_col1:
     down_col1.markdown("### Raw Materials :thread:")
     down_col1.markdown("<br>", unsafe_allow_html=True)
@@ -100,6 +109,7 @@ with down_col1:
     if rawd:
         down_col1.success("Downloded")
 
+#INVENTORY
 with down_col2:
     down_col2.markdown("### Inventory :package:")
     down_col2.markdown("<br>", unsafe_allow_html=True)
@@ -118,6 +128,7 @@ with down_col2:
     if invd:
         down_col2.success("Download")
 
+#SALES
 with down_col3:
     down_col3.markdown("### Sales :moneybag:")
     down_col3.markdown("<br>", unsafe_allow_html=True)

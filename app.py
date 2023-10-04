@@ -1,6 +1,7 @@
 from pandas.core.arrays import categorical
 from pandas.io.pytables import _ensure_encoding
 import streamlit as st
+from st_pages import Page, show_pages, add_page_title
 import plotly.express as px
 import pandas as pd
 import plotly.graph_objects as go
@@ -8,13 +9,18 @@ from datetime import datetime
 import time
 import os
 
+#Page Configs
 st.set_page_config(page_title="Analytics", page_icon=":bar_chart:", layout="wide")
 
-st.title(" :bar_chart: Details")
+#Pages
+show_pages([Page("app.py","Home","🏠"),Page("pages/Storage.py","Storage",":package:"),Page("pages/Sales.py","Sales",":moneybag:"),Page("pages/Dataset.py","Dataset","📁")])
 
 # Styles
 with open("styles/app.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+
+st.title("All Details")
 
 # READ FROM EXCEL
 raw = pd.read_excel("Dataset/Raw_Materials.xlsx")
@@ -67,7 +73,7 @@ with dcol1:
     r_end = datetime.combine(r_end, datetime.min.time())
 
 with dcol2:
-    dcol2.markdown("## FINISHED PRODUCTS")
+    dcol2.markdown("## Finished Products")
     dcol2.markdown("<br>", unsafe_allow_html=True)
     dcol2.markdown("### START")
     i_start = dcol2.date_input("  ", inv_start, inv_start, inv_end, format="DD/MM/YYYY")
@@ -78,7 +84,7 @@ with dcol2:
     i_end = datetime.combine(i_end, datetime.min.time())
 
 with dcol3:
-    dcol3.markdown("## SOLD PRODUCTS")
+    dcol3.markdown("## Sold Products")
     dcol3.markdown("<br>", unsafe_allow_html=True)
     dcol3.markdown("### START DATE :calendar:")
     s_start = dcol3.date_input("  ", sal_start, sal_start, sal_end, format="DD/MM/YYYY")
@@ -89,6 +95,8 @@ with dcol3:
     s_end = datetime.combine(s_end, datetime.min.time())
 
 st.markdown("<br><br>", unsafe_allow_html=True)
+if(r_start > r_end) or (i_start > i_end) or (s_start > s_end) :
+    st.error("START DATE MUST BE GREATER THAN END DATE")
 
 date_raw = raw[(raw["Date"] >= r_start) & (raw["Date"] <= r_end)].copy()
 date_inv = inv[(inv["Date"] >= i_start) & (raw["Date"] <= i_end)].copy()

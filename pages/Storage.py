@@ -112,7 +112,7 @@ colour_unique = raw["R_Colour"].unique()
 fabric_colour = sorted(colour_unique)
 
 st.markdown("# REMAINING STOCKS :package: ")
-st.markdown("## RAW MATERIALS")
+st.markdown("## RAW MATERIALS :thread:")
 st.markdown("<br>", unsafe_allow_html=True)
 rem_raw_col1, rem_raw_col2 = st.columns((2))
 
@@ -147,7 +147,7 @@ with rem_raw_col2:
     rem_raw_col2.plotly_chart(fig, use_container_width=True)
 
 
-st.markdown("## FINISHED PRODUCTS")
+st.markdown("## FINISHED PRODUCTS :shirt:")
 st.markdown("<br>", unsafe_allow_html=True)
 rem_inv_col1, rem_inv_col2 = st.columns((2))
 

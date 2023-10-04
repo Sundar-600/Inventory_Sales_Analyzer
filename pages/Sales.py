@@ -74,6 +74,7 @@ diff_cur_exp = round(
     ((avg_year_expenditure - cur_year_exp) / avg_year_expenditure) * 100, 2
 )
 
+#SIDEBAR OPTIONS 
 st.sidebar.header("OPTIONS")
 option = st.sidebar.selectbox("   ", ["Sales", "Profit"])
 ycol1, ycol2 = st.columns((3, 1))
@@ -81,6 +82,8 @@ years = np.append(0000, years)
 st.sidebar.markdown("## FILTERS")
 st.sidebar.markdown("## YEAR")
 year = st.sidebar.selectbox("", years)
+
+# SALES GRAPH
 if option == "Sales":
     if year == 0:
         st.session_state["Sal"] = sal
@@ -248,6 +251,7 @@ if option == "Sales":
                         delta_color="inverse",
                     )
 
+#PROFIT GRAPH
 else:
     if year == 0:
         with ycol1:

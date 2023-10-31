@@ -17,7 +17,7 @@ show_pages([Page("app.py","Home","🏠"),Page("pages/Storage.py","Storage",":pac
 
 # Styles
 with open("styles/app.css") as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html=True)
 
 
 st.title("All Details")

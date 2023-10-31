@@ -103,8 +103,8 @@ with up_col2:
         if org_inv_col == new_inv_col:
             new_inv_min_date = up_inv["Date"].min()
             new_inv_min_id = up_inv["Order_ID"].min()
-            if (org_inv_max_date <= new_raw_min_date):
-                if(org_inv_max_id < new_raw_min_id):
+            if (org_inv_max_date <= new_inv_min_date):
+                if(org_inv_max_id < new_inv_min_id):
                     up_col2.success("File Successfully Uploaded")
                     df = []
                     df.append(inv)
